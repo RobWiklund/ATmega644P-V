@@ -40,7 +40,7 @@ int main (void)
 		LCD_goto(ROW2+6); LCD_puti(kvant8); 
 		LCD_goto(ROW2);                                  
 		
-		LCD_puts("Sp�nning"); 
+		LCD_puts("Voltage"); 
 		LCD_goto(ROW4);  
 		_delay_ms(100); 
 		ADCStart();
@@ -52,7 +52,7 @@ return(0);
 
 void ADCInit() 
 {                            
-ADCSRA = (1 << ADPS2) | (1 << ADPS1) | (1 << ADPS0) | (1 << ADEN); // St�ller ner hastigheten p� ad konvertern med 128 
+ADCSRA = (1 << ADPS2) | (1 << ADPS1) | (1 << ADPS0) | (1 << ADEN); // Ställer ner hastigheten på ad konvertern med 128 
 ADMUX = (1 << REFS0)|(1 << MUX0)| ((1 << ADLAR));
 }
 
