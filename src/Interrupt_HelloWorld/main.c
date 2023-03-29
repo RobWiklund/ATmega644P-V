@@ -21,7 +21,7 @@ void InterruptInit(void);
 int main (void)
 {
 		short i = 0;
-		int DelayTime = 1000;		// 1 s
+		int DelayTime = 1000;		
 	
      LCD_init();			// Initialize the LCD
      InterruptInit();		// Initialize interrupt

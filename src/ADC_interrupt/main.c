@@ -45,31 +45,37 @@ ISR(ADC_vect) {
 		int kvant8deci_8;
 
 
-		inADC = (ADCL>>6) + (ADCH<<2); // Både minsta och största signifikanta bitarna till inAD
-		inADCH = ADCH;
+		inADC = (ADCL>>6) + (ADCH<<2); // inADC läser värden med 10 bitar, värden mellan 0-1023.
+		inADCH = ADCH;	// inADCH läser värden med 8 bitar (1111 1111), värden mellan 0-255. 
 		
+		// inADC och inADCH -> används i denna kod för att jämföra noggrannheten mellan 8 och 10 bitar 
+		
+
 		LCD_goto(ROW1); LCD_puts("Voltage:");
-		
-		kvant8_10 = (inADC) / 1023.0 * 5; // 10 bitar, värden mellan 0 ... 5V
-		kvant8deci_10 = ((int) 100 * kvant8_10);
 
-		LCD_goto(ROW2+14); LCD_puts(" volt ");
-		LCD_goto(ROW2+9); LCD_puti((kvant8deci_10));
-		LCD_goto(ROW2+11); LCD_putc(',');
-		LCD_goto(ROW2+6); LCD_puti(kvant8_10);
-		LCD_goto(ROW2);
+		// ------- 10 bitar --------- //
+
+		kvant8_10 = (inADC) / 1023.0 * 5; // Divideras med 1023 -> Största talet -> Omvandlar avlästa värden 0-1023 till 0-5 V. Då maxvärdet är 1023 blir det 1023/1023 * 5 = 5 
+		kvant8deci_10 = ((int) 100 * kvant8_10); // Tar omvandligen och lägger till 100, (4.17 -> 417)	
 		
-		LCD_puts("10 bit");
+		LCD_goto(ROW2+14); LCD_puts(" volt "); 
+		LCD_goto(ROW2+9); LCD_puti((kvant8deci_10)); // Skriver ut decimaltalet utan första karaktären. (417 -> 17)
+		LCD_goto(ROW2+11); LCD_putc(','); // Comma mellan talen (4,)
+		LCD_goto(ROW2+6); LCD_puti(kvant8_10); // Skriver ut talet före comma (4)
+		LCD_goto(ROW2);                                  
+		
+		LCD_puts("10 bit"); 
 
 		
-		// ------- 8 bit --------- //
+		// ------- 8 bitar --------- //
 		
-		kvant8_8 = (inADCH) / 255.0 * 5; // 8 bitar, värden mellan 0 ... 5V
-		kvant8deci_8 = ((int) 100 * kvant8_8);
+		kvant8_8 = (inADCH) / 255.0 * 5; // Omvandlar avlästa värden 0-255 till 0-5 V. Då maxvärdet är 255 blir det 255/255 * 5 = 5 
+		kvant8deci_8 = ((int) 100 * kvant8_8); // Tar omvandligen och lägger till 100, (4.17 -> 417)
+		
 		LCD_goto(ROW3+14); LCD_puts(" volt ");
-		LCD_goto(ROW3+9); LCD_puti((kvant8deci_8));
-		LCD_goto(ROW3+11); LCD_putc(',');
-		LCD_goto(ROW3+6); LCD_puti(kvant8_8);
+		LCD_goto(ROW3+9); LCD_puti((kvant8deci_8)); // Skriver ut decimaltalet utan första karaktären. (417 -> 17)
+		LCD_goto(ROW3+11); LCD_putc(','); // Comma mellan talen (4,)
+		LCD_goto(ROW3+6); LCD_puti(kvant8_8); // Skriver ut talet före comma (4)
 		LCD_goto(ROW3);
 		
 		LCD_puts("8 bit");
@@ -110,8 +116,8 @@ void ADCInit()
 	ADLAR: 	ADC Adjust Result
 	0		The result is right adjusted.
 ->	1		The result is left adjusted.
-*/
 
+*/
 
 	ADCSRA = (1 << ADPS2) | (1 << ADPS1) | (1 << ADPS0) | (1 << ADEN) | (1 << ADIE);  // Ställer ner hastigheten på ad konvertern med 128 och interrupt
 	

@@ -29,9 +29,9 @@ int main (void)
 	int kvant8deci; 
 	
 	while(1) {      
-		inADCH = ADCH; // ADCH läser värden med 8 bitar (1111 1111), värden mellan 0-255, detta betyder 256 olika värden.
+		inADCH = ADCH; // inADCH läser värden med 8 bitar (1111 1111), värden mellan 0-255.
 		
-		kvant8 = (inADCH) / 255.0 * 5.0; // Omvandlar avlästa värden 0-255 till 0-5 V. Då maxvärdet är 255 blir det dividerat med 255 * 5 = 5 
+		kvant8 = (inADCH) / 255.0 * 5.0; // Omvandlar avlästa värden 0-255 till 0-5 V. Då maxvärdet är 255 blir det 255/255 * 5 = 5 
 		kvant8deci = ((int) 100 * kvant8); // Tar omvandligen och lägger till 100, (4.17 -> 417)
 		
 		LCD_goto(ROW2+14); LCD_puts(" volt "); 
@@ -101,6 +101,7 @@ ADMUX = (1 << REFS0)|(1 << MUX0)|(1 << ADLAR);
 	ADLAR: 	ADC Adjust Result
 	0		The result is right adjusted.
 ->	1		The result is left adjusted.
+
 */
 }
 
