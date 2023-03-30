@@ -62,7 +62,7 @@ ADCSRA = (1 << ADPS2) | (1 << ADPS1) | (1 << ADPS0) | (1 << ADEN);
 	ADCSRA
 	----------------------------------------		
 
-	ADPS2:	ADPS1:	ADPS0:	Division Factor:
+	ADPS2:		ADPS1:		ADPS0:		Division Factor:
 	0		0		0		2
 	0		0		1		2
 	0		1		0	 	4
@@ -73,8 +73,8 @@ ADCSRA = (1 << ADPS2) | (1 << ADPS1) | (1 << ADPS0) | (1 << ADEN);
 ->	1		1		1 		128 	-> Ställer ner hastigheten på ad konvertern med 128 
 
 
-	ADEN:	Function:
-		1		ADC Enable
+	ADEN:		Function:
+	1		ADC Enable
 
 */
 
@@ -82,13 +82,13 @@ ADCSRA = (1 << ADPS2) | (1 << ADPS1) | (1 << ADPS0) | (1 << ADEN);
 ADMUX = (1 << REFS0)|(1 << MUX0)|(1 << ADLAR);
 
 /*
-	REFS1: 	REFS0:	Voltage Reference Selection:
+	REFS1: 		REFS0:		Voltage Reference Selection:
 	0		0 		AREF, Internal Vref turned off
 ->	0		1 		AVCC with external capacitor at AREF pin	-> Ställer in referensspänningen för att stabilisera spänningen och reducera störningar
 	1		0 		Internal 1.1V Voltage Reference with external capacitor at AREF pin
 	1		1 		Internal 2.56V Voltage Reference with external capacitor at AREF pin
 
-	MUX2:	MUX:1	MUX0:	Single Ended Input:
+	MUX2:		MUX:1		MUX0:		Single Ended Input:
 	0		0		0		ADC0
 ->	0		0		1	 	ADC1	-> Ingångskälla port och pinne: PA1
 	0		1		0	 	ADC2
