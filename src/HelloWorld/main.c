@@ -49,7 +49,7 @@ int main (void)
 /*	
 	VARIABELN start
 
-	Räknare:			Textsträngens position:						Output:
+	Räknare:			Textsträngens position:				Output:
 	start= 31			outputText[] = "    Hello World[ ]  ";		[ ]
 	start= 30			outputText[] = "    Hello Worl[d]   ";		[d]
 	start= 29			outputText[] = "    Hello Wor[l]d   ";		[ld]
@@ -65,15 +65,15 @@ int main (void)
 
 	Används endast för att skriva ut 20 karaktär från startposition mot höger, loopar då igenom 20 tecken för varje steg variabeln "start" minskar med 1.
 
-	Exempel:			Textsträngens position:						Output:
+	Exempel:			Textsträngens position:				Output:
 	start= 27			outputText[] = "    Hello W[o]rld   ";		[orld]
 
 	De 20 tecken som finns är då:
-	rld                    "
+	"orld                    "
 
 
 	Då används i såhär:
 
 	i[0]	i[1]	i[2]	i[3]	i[4]	i[5]   ->	i[19]
-	'r'		'l'		'd'		' '		' '		' '			' '
+	'r'	'l'	'd'	' '	' '	' '		' '
 */
